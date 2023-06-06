@@ -192,7 +192,7 @@
 
 - (void)sendToken:(NSString *)fcmToken {
     if (self.tokenRefreshCallbackId) {
-        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:fcmToken];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:self.tokenRefreshCallbackId];
     }
 }

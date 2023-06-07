@@ -66,10 +66,14 @@
 - (void)getToken:(CDVInvokedUrlCommand *)command {
     CDVPluginResult *pluginResult;
     NSString* type = [command.arguments objectAtIndex:0];
-
+    bool forceRefresh = false;
+    if ([command.arguments count] > 1) {
+        forceRefresh = [[command.arguments objectAtIndex:1] boolValue];
+    }
+    
     if ([type length] == 0) {
         NSString *fcmToken = [FIRMessaging messaging].FCMToken;
-        if (fcmToken) {
+        if (fcmToken && !forceRefresh) {
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:fcmToken];
         } else {
             [[FIRMessaging messaging] tokenWithCompletion:^(NSString * token, NSError * err) {

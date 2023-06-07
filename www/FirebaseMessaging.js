@@ -142,9 +142,9 @@ exports.getToken =
  *     console.log("Got device token: ", token);
  * });
  */
-function(format) {
+function(format, force) {
     return new Promise(function(resolve, reject) {
-        exec(resolve, reject, PLUGIN_NAME, "getToken", [format || ""]);
+        exec(resolve, reject, PLUGIN_NAME, "getToken", [format || "", !!force]);
     });
 };
 
